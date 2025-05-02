@@ -142,17 +142,17 @@ body {
     padding-inline: 15px;
     padding-block-end: 30px;
   }
-
   .menu::before {
     position: fixed;
     content: "";
     z-index: 2;
     block-size: 64px;
+    inset-block-start: 15px;
     inset-inline-start: 15px;
     inset-inline-end: 15px;
-    inset-block-start: 15px;
+
     transition: visibility 0.3s;
-    visibility: visible;
+    visibility: hidden;
 
     border-radius: 20px;
     background-color: #192131;
@@ -163,9 +163,8 @@ body {
   .open-menu .menu {
     inset-inline-start: 0;
   }
-
   .open-menu .menu::before {
-    opacity: 1;
+    visibility: visible;
   }
 
   .menu__list {
@@ -174,10 +173,10 @@ body {
     row-gap: 25px;
     padding-inline-end: 18px;
   }
-
   .menu__link {
     font-size: 30px;
   }
+
   .icon-menu {
     display: block;
     position: relative;
@@ -191,32 +190,39 @@ body {
     content: "";
     position: absolute;
     block-size: 4px;
-    border-radius: 3px;
-
+    border-radius: 4px;
     background-color: #fff;
-  }
 
+    transition: all 0.3s;
+  }
   .icon-menu::before,
   .icon-menu::after {
     inline-size: 15px;
   }
-
-  .icon-menu span {
-    inline-size: 28px;
-    inset-inline-start: 50%;
-    inset-block-start: 50%;
-    transform: translate(-50%, -50%);
-    transition: all 0.3s;
-  }
-
   .icon-menu::before {
     inset-inline-start: 10px;
     inset-block-start: 14px;
   }
-
   .icon-menu::after {
     inset-inline-end: 10px;
     inset-block-end: 14px;
+  }
+  .icon-menu span {
+    inset-inline-start: 50%;
+    inset-block-start: 50%;
+    transform: translate(-50%, -50%);
+    inline-size: 28px;
+  }
+
+  .open-menu .icon-menu span {
+    transform: translate(-50%, -50%) rotate(-45deg);
+    inline-size: 33px;
+  }
+  .open-menu .icon-menu::before {
+    transform: translate(0px, 1px) rotate(45deg);
+  }
+  .open-menu .icon-menu::after {
+    transform: translate(0, -2px) rotate(45deg);
   }
 
   .header__body {
@@ -226,22 +232,17 @@ body {
     grid-template-columns: auto auto;
     justify-content: space-between;
   }
-
-  .open-menu .icon-menu span {
-    transform: translate(-50%, -50%) rotate(-45deg);
-    inline-size: 33px;
-  }
-
-  .open-menu .icon-menu::before {
-    transform: rotate(45deg);
-  }
-
-  .open-menu .icon-menu::after {
-    transform: rotate(45deg);
-  }
 }
-
 @media (max-width: 439.98px) {
+  .menu__list:not(:last-child) {
+    margin-bottom: 30px;
+  }
+  .menu__button {
+    display: block;
+  }
+  .menu__button:not(:last-child) {
+    margin-bottom: 15px;
+  }
   .actions-header__button {
     display: none;
   }
